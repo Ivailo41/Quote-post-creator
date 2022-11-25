@@ -3,16 +3,10 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include <string>
 #include <vector>
-
-struct Options
-{
-    int resX, resY, waterCharacterSize, textCharacterSize;
-
-    std::wstring splitter, watermarkString;
-    std::string quoteFileDir, backgroundDir, txtFontDir, waterFontDir;
-};
+#include <codecvt>
+#include <locale>
+#include "Quote_Structs.h"
 
 static void writeFileToString(std::wstring& stringToWrite, std::string fileName)
 {
@@ -87,12 +81,13 @@ static Options loadOptions(std::string optionsDir)
     options.resY = stoi(optionsVector[1]);
     options.textCharacterSize = stoi(optionsVector[2]);
     options.waterCharacterSize = stoi(optionsVector[3]);
-    options.splitter = L"\r\n;\r\n";
+    options.splitter = L"\r\n" + std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(optionsVector[4]) + L"\r\n";
     options.quoteFileDir = optionsVector[5];
     options.txtFontDir = optionsVector[6];
     options.waterFontDir = optionsVector[7];
     options.backgroundDir = optionsVector[8];
-    options.watermarkString = L"@citati.bg.en";
+    options.watermarkString = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(optionsVector[9]);
+
 
     return options;
 }
