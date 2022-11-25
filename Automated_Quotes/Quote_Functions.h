@@ -91,3 +91,25 @@ static Options loadOptions(std::string optionsDir)
 
     return options;
 }
+
+static sf::Font createFont(std::string fontDirectory)
+{
+    sf::Font font;
+    if (!font.loadFromFile(fontDirectory))
+    {
+        std::cout << "Font not found!";
+    }
+    return font;
+}
+
+static sf::Text makeText(const std::wstring textString, const size_t characterSize, const sf::Color color)
+{
+    sf::Text outputText;
+    outputText.setPosition(0, 0);
+    outputText.setString(textString);
+    outputText.setCharacterSize(characterSize);
+    outputText.setStyle(sf::Text::Regular);
+    outputText.setFillColor(color);
+
+    return outputText;
+}

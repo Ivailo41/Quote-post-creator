@@ -4,29 +4,6 @@ using namespace std;
 const string optionsDir = "Resources/options.txt";
 const Options options = loadOptions(optionsDir);
 
-sf::Font createFont(string fontDirectory)
-{
-    sf::Font font;
-    if (!font.loadFromFile(fontDirectory))
-    {
-        cout << "Font not found!";
-    }
-
-    return font;
-}
-
-sf::Text makeText(const std::wstring textString, const size_t characterSize)
-{
-    sf::Text outputText;
-    outputText.setPosition(0, 0);
-    outputText.setString(textString);
-    outputText.setCharacterSize(characterSize);
-    outputText.setStyle(sf::Text::Regular);
-    outputText.setFillColor(sf::Color::Black);
-
-    return outputText;
-}
-
 int main()
 {
     //Set quotes container
@@ -34,6 +11,10 @@ int main()
 
     writeFileToString(quoteString, options.quoteFileDir);
     vector<std::wstring> quotesArray = splitStringToVector(quoteString, options.splitter);
+
+    //Set text color temporary ADD IT IN OPTIONS
+    sf::Color textColor = sf::Color::Black;
+    textColor.a = 204;
 
     //Set Background
     sf::Texture backGroundTexture;
@@ -45,7 +26,7 @@ int main()
     sf::Text text;
 
     //Set Watermark Text
-    sf::Text waterMarkText = makeText(options.watermarkString, options.waterCharacterSize);
+    sf::Text waterMarkText = makeText(options.watermarkString, options.waterCharacterSize, textColor);
     sf::Font waterFont = createFont(options.waterFontDir);
     waterMarkText.setFont(waterFont);
     const sf::FloatRect waterLbounds = waterMarkText.getLocalBounds();
@@ -55,8 +36,9 @@ int main()
 
     for (int i = 0; i < quotesArray.size(); i++)
     {
-        text = makeText(quotesArray[i], options.textCharacterSize);
+        text = makeText(quotesArray[i], options.textCharacterSize, textColor);
         text.setFont(txtFont);
+        text.setLetterSpacing(0.1);
         sf::FloatRect textLbounds = text.getLocalBounds();
         text.setPosition(options.resX / 2 - textLbounds.width/2, options.resY / 2 - textLbounds.height / 2);
         sf::FloatRect textGbounds = text.getGlobalBounds();

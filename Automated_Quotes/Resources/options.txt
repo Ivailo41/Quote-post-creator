@@ -2,7 +2,7 @@
 1080
 
 [Resolution Y]:
-1706
+1440
 
 [Quote text character size]:
 70
@@ -17,7 +17,7 @@
 Resources/quotes.txt
 
 [Quote font directory]:
-Resources/Fonts/calibril.ttf
+Resources/Fonts/SourceSans3-Light.ttf
 
 [Watermark font directory]:
 Resources/Fonts/YuGothL.ttc
