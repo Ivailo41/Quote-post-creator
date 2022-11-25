@@ -4,6 +4,6 @@ The project is still work in progress.
 Im making use of the SFML library.
 
 # Planned features
-Making an UI for the program.
-Adding more ways to customise the image contents.
-Make it able to choose text alignment.
+1. Making an UI for the program.
+2. Adding more ways to customise the image contents.
+3. Make it able to choose text alignment.
