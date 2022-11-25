@@ -1,0 +1,29 @@
+[Resolution X]:
+1080
+
+[Resolution Y]:
+1706
+
+[Quote text character size]:
+70
+
+[Watermark text character size]:
+60
+
+[Symbol for ending quote]:
+;
+
+[Directory of the quotes.txt]:
+Resources/quotes.txt
+
+[Quote font directory]:
+Resources/Fonts/calibril.ttf
+
+[Watermark font directory]:
+Resources/Fonts/YuGothL.ttc
+
+[Background image directory]:
+Resources/bg.png
+
+[Watermark text]:
+@citati.bg.en

@@ -1,20 +1,13 @@
 ﻿#include "String_Operations.h"
 using namespace std;
 
-//make em editable from file
-const int resX = 1024;
-const int resY = 1024;
-
-const wstring splitter = L"\n;\n";
-const string quoteFileDir = "Resources/quotes.txt";
-const string fontDir = "Resources/Fonts/calibri.ttf";
-const string backgroundDir = "Resources/bg.jpg";
-const wstring watermarkString = L"@citati.bg.en";
+const string optionsDir = "Resources/options.txt";
+const Options options = loadOptions(optionsDir);
 
 sf::Font createFont(string fontDirectory)
 {
     sf::Font font;
-    if (!font.loadFromFile(fontDir))
+    if (!font.loadFromFile(fontDirectory))
     {
         cout << "Font not found!";
     }
@@ -36,37 +29,36 @@ sf::Text makeText(const std::wstring textString, const size_t characterSize)
 
 int main()
 {
-
-    const sf::Font font = createFont(fontDir);
-
     //Set quotes container
     std::wstring quoteString;
 
-    writeFileToString(quoteString, quoteFileDir);
-    vector<std::wstring> quotesArray = splitStringToVector(quoteString, splitter);
+    writeFileToString(quoteString, options.quoteFileDir);
+    vector<std::wstring> quotesArray = splitStringToVector(quoteString, options.splitter);
 
     //Set Background
     sf::Texture backGroundTexture;
-    backGroundTexture.loadFromFile(backgroundDir);
+    backGroundTexture.loadFromFile(options.backgroundDir);
     sf::Sprite backgroundSprite(backGroundTexture);
 
     //Set Quote Text
+    sf::Font txtFont = createFont(options.txtFontDir);
     sf::Text text;
 
     //Set Watermark Text
-    sf::Text waterMarkText = makeText(watermarkString, 50);
-    waterMarkText.setFont(font);
+    sf::Text waterMarkText = makeText(options.watermarkString, options.waterCharacterSize);
+    sf::Font waterFont = createFont(options.waterFontDir);
+    waterMarkText.setFont(waterFont);
     const sf::FloatRect waterLbounds = waterMarkText.getLocalBounds();
 
     sf::RenderTexture rTexture;
-    rTexture.create(resX, resY);
+    rTexture.create(options.resX, options.resY);
 
     for (int i = 0; i < quotesArray.size(); i++)
     {
-        text = makeText(quotesArray[i], 50);
-        text.setFont(font);
+        text = makeText(quotesArray[i], options.textCharacterSize);
+        text.setFont(txtFont);
         sf::FloatRect textLbounds = text.getLocalBounds();
-        text.setPosition(resX / 2 - textLbounds.width/2, resY / 2 - textLbounds.height / 2);
+        text.setPosition(options.resX / 2 - textLbounds.width/2, options.resY / 2 - textLbounds.height / 2);
         sf::FloatRect textGbounds = text.getGlobalBounds();
         waterMarkText.setPosition(textGbounds.left + textLbounds.width - waterLbounds.width, textGbounds.top + textLbounds.height);
 
