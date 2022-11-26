@@ -7,4 +7,5 @@ struct Options
 
     std::wstring splitter, watermarkString;
     std::string quoteFileDir, backgroundDir, txtFontDir, waterFontDir;
+    sf::Color textColor;
 };

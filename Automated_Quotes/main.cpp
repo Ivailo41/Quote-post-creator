@@ -12,10 +12,6 @@ int main()
     writeFileToString(quoteString, options.quoteFileDir);
     vector<std::wstring> quotesArray = splitStringToVector(quoteString, options.splitter);
 
-    //Set text color temporary ADD IT IN OPTIONS
-    sf::Color textColor = sf::Color::Black;
-    textColor.a = 204;
-
     //Set Background
     sf::Texture backGroundTexture;
     backGroundTexture.loadFromFile(options.backgroundDir);
@@ -26,7 +22,7 @@ int main()
     sf::Text text;
 
     //Set Watermark Text
-    sf::Text waterMarkText = makeText(options.watermarkString, options.waterCharacterSize, textColor);
+    sf::Text waterMarkText = makeText(options.watermarkString, options.waterCharacterSize, options.textColor);
     sf::Font waterFont = createFont(options.waterFontDir);
     waterMarkText.setFont(waterFont);
     const sf::FloatRect waterLbounds = waterMarkText.getLocalBounds();
@@ -36,7 +32,7 @@ int main()
 
     for (int i = 0; i < quotesArray.size(); i++)
     {
-        text = makeText(quotesArray[i], options.textCharacterSize, textColor);
+        text = makeText(quotesArray[i], options.textCharacterSize, options.textColor);
         text.setFont(txtFont);
         text.setLetterSpacing(0.1);
         sf::FloatRect textLbounds = text.getLocalBounds();

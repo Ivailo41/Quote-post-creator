@@ -76,6 +76,14 @@ static Options loadOptions(std::string optionsDir)
         optionsVector.push_back(line);
         getline(file, line);
     }
+    //ASSIGN COLOR VALUES TO A COLOR
+    std::wstring textColorValuesStr = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(optionsVector[10]);
+    std::vector<std::wstring> textColorValues = splitStringToVector(textColorValuesStr, L",");
+    sf::Color textColor;
+    textColor.r = stof(textColorValues[0]);
+    textColor.g = stof(textColorValues[1]);
+    textColor.b = stof(textColorValues[2]);
+    textColor.a = stof(textColorValues[3]);
 
     options.resX = stoi(optionsVector[0]);
     options.resY = stoi(optionsVector[1]);
@@ -87,6 +95,7 @@ static Options loadOptions(std::string optionsDir)
     options.waterFontDir = optionsVector[7];
     options.backgroundDir = optionsVector[8];
     options.watermarkString = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(optionsVector[9]);
+    options.textColor = textColor;
 
 
     return options;

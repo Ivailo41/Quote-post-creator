@@ -26,4 +26,7 @@ Resources/Fonts/YuGothL.ttc
 Resources/bg.png
 
 [Watermark text]:
-@citati.bg.en
+@citatkis.bg.en
+
+[Text Color (rgba)]
+0,0,0,200
