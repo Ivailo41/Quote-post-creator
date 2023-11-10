@@ -1,5 +1,5 @@
 # Summary
-C++ Standalone version of the Photoshop script that turns text to image for instagram page.
+C++ Standalone program that takes list of text inputs and centers them on an background image for an Instagram post
 The project is still work in progress.
 Im making use of the SFML library.
 
